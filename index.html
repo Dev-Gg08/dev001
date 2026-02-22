@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz Challenge - ลำดับและอนุกรมเลขคณิต</title>
+    <meta name="description" content="เกมคณิตศาสตร์ออนไลน์สไตล์ Kahoot! - ลุยโจทย์ลำดับและอนุกรมเลขคณิตแบบเรียลไทม์">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Prompt:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- ==================== MAIN SCREEN (TABS) ==================== -->
+        <section id="screen-main" class="screen active">
+            <div class="bg-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="brand">
+                    <span class="brand-icon">🧮</span>
+                    <span class="brand-name">MathQuiz</span>
+                </div>
+
+            </header>
+
+            <!-- Tab Navigation -->
+            <nav class="tab-nav">
+                <button class="tab-btn active" data-tab="tab-home">
+                    <span class="tab-icon">🏠</span>
+                    <span class="tab-label">หน้าหลัก</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-create">
+                    <span class="tab-icon">🎯</span>
+                    <span class="tab-label">สร้างห้อง</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-theme">
+                    <span class="tab-icon">🎨</span>
+                    <span class="tab-label">ธีมสี</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-learn">
+                    <span class="tab-icon">📚</span>
+                    <span class="tab-label">เรียนรู้</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-about">
+                    <span class="tab-icon">👥</span>
+                    <span class="tab-label">เกี่ยวกับเรา</span>
+                </button>
+            </nav>
+
+            <!-- Tab Content Area -->
+            <div class="tab-content-area">
+
+                <!-- TAB: HOME (Join Game) -->
+                <div id="tab-home" class="tab-panel active">
+                    <div class="hero-area">
+                        <div class="hero-badge">🎮 พร้อมลุย!</div>
+                        <h1 class="hero-title">Math Quiz<br>Challenge</h1>
+                        <p class="hero-sub">ลำดับเลขคณิต & อนุกรมเลขคณิต</p>
+                    </div>
+                    <div class="glass-card join-card">
+                        <h3 class="card-title">เข้าร่วมเกม</h3>
+                        <input type="text" id="input-pin" class="input-field pin-input" placeholder="Game PIN"
+                            maxlength="4" inputmode="numeric">
+                        <input type="text" id="input-nickname" class="input-field" placeholder="Nickname ของคุณ">
+                        <button id="btn-join" class="btn btn-accent btn-lg btn-full">
+                            <span>เข้าร่วม!</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TAB: CREATE ROOM -->
+                <div id="tab-create" class="tab-panel">
+                    <div class="create-room-area">
+                        <div class="create-icon-wrap">
+                            <div class="create-icon">🎯</div>
+                        </div>
+                        <h2 class="section-heading">สร้างห้องเกม</h2>
+                        <p class="section-sub">สร้างห้องใหม่แล้วแชร์ PIN ให้เพื่อนเข้าร่วม</p>
+                        <div class="glass-card create-card">
+                            <div class="create-info">
+                                <div class="info-item">
+                                    <span class="info-icon">❓</span>
+                                    <span>10 ข้อ ลำดับ & อนุกรมเลขคณิต</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">⏱️</span>
+                                    <span>30 วินาทีต่อข้อ</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🏆</span>
+                                    <span>คะแนนเต็ม 1,500 / ข้อ</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">👥</span>
+                                    <span>ไม่จำกัดจำนวนผู้เล่น</span>
+                                </div>
+                            </div>
+                            <button id="btn-create-room" class="btn btn-accent btn-lg btn-full">
+                                <span>🚀 สร้างห้องเลย!</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: THEME -->
+                <div id="tab-theme" class="tab-panel">
+                    <div class="theme-area">
+                        <div class="create-icon-wrap">
+                            <div class="create-icon">🎨</div>
+                        </div>
+                        <h2 class="section-heading">เลือกธีมสี</h2>
+                        <p class="section-sub">ปรับโทนสีเว็บตามสไตล์ของคุณ</p>
+                        <div class="theme-grid">
+                            <button class="theme-card active" data-theme="purple">
+                                <div class="theme-preview"
+                                    style="background: linear-gradient(135deg, #46178f, #1e0a3c);">
+                                </div>
+                                <span class="theme-name">Purple Classic</span>
+                            </button>
+                            <button class="theme-card" data-theme="ocean">
+                                <div class="theme-preview"
+                                    style="background: linear-gradient(135deg, #0077b6, #023e8a);">
+                                </div>
+                                <span class="theme-name">Ocean Blue</span>
+                            </button>
+                            <button class="theme-card" data-theme="sunset">
+                                <div class="theme-preview"
+                                    style="background: linear-gradient(135deg, #f94144, #90206b);">
+                                </div>
+                                <span class="theme-name">Sunset Red</span>
+                            </button>
+                            <button class="theme-card" data-theme="forest">
+                                <div class="theme-preview"
+                                    style="background: linear-gradient(135deg, #2d6a4f, #1b3a2d);">
+                                </div>
+                                <span class="theme-name">Forest Green</span>
+                            </button>
+                            <button class="theme-card" data-theme="midnight">
+                                <div class="theme-preview"
+                                    style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+                                </div>
+                                <span class="theme-name">Midnight Dark</span>
+                            </button>
+                            <button class="theme-card" data-theme="sakura">
+                                <div class="theme-preview"
+                                    style="background: linear-gradient(135deg, #c95792, #6a0572);">
+                                </div>
+                                <span class="theme-name">Sakura Pink</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: LEARN -->
+                <div id="tab-learn" class="tab-panel">
+                    <div class="learn-area">
+                        <div class="create-icon-wrap">
+                            <div class="create-icon">📚</div>
+                        </div>
+                        <h2 class="section-heading">เรียนรู้สูตร</h2>
+                        <p class="section-sub">ทบทวนสูตรก่อนเล่นเกม</p>
+
+                        <!-- Arithmetic Sequence -->
+                        <div class="glass-card learn-card">
+                            <div class="learn-card-header arith">
+                                <span class="learn-badge">📐 ลำดับเลขคณิต</span>
+                            </div>
+                            <div class="learn-body">
+                                <div class="formula-row">
+                                    <span class="formula-label">พจน์ทั่วไป</span>
+                                    <span class="formula-val">aₙ = a₁ + (n−1)d</span>
+                                </div>
+                                <div class="formula-row">
+                                    <span class="formula-label">ผลต่างร่วม</span>
+                                    <span class="formula-val">d = a₂ − a₁</span>
+                                </div>
+                                <div class="formula-row">
+                                    <span class="formula-label">หาจำนวนพจน์</span>
+                                    <span class="formula-val">n = [(aₙ − a₁) / d] + 1</span>
+                                </div>
+                                <div class="learn-example">
+                                    <strong>ตัวอย่าง:</strong> 2, 5, 8, 11, 14, ... → a₁ = 2, d = 3
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Arithmetic Series -->
+                        <div class="glass-card learn-card">
+                            <div class="learn-card-header series">
+                                <span class="learn-badge">📊 อนุกรมเลขคณิต</span>
+                            </div>
+                            <div class="learn-body">
+                                <div class="formula-row">
+                                    <span class="formula-label">ผลบวก n พจน์</span>
+                                    <span class="formula-val">Sₙ = n/2 (a₁ + aₙ)</span>
+                                </div>
+                                <div class="formula-row">
+                                    <span class="formula-label">ผลบวก (อีกรูป)</span>
+                                    <span class="formula-val">Sₙ = n/2 [2a₁ + (n−1)d]</span>
+                                </div>
+                                <div class="learn-example">
+                                    <strong>ตัวอย่าง:</strong> S₅ ของ 1+2+3+4+5 = 5/2(1+5) = 15
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Geometric Sequence -->
+                        <div class="glass-card learn-card">
+                            <div class="learn-card-header geo">
+                                <span class="learn-badge">🔢 ลำดับเรขาคณิต</span>
+                            </div>
+                            <div class="learn-body">
+                                <div class="formula-row">
+                                    <span class="formula-label">พจน์ทั่วไป</span>
+                                    <span class="formula-val">aₙ = a₁ · rⁿ⁻¹</span>
+                                </div>
+                                <div class="formula-row">
+                                    <span class="formula-label">อัตราส่วนร่วม</span>
+                                    <span class="formula-val">r = a₂ / a₁</span>
+                                </div>
+                                <div class="formula-row">
+                                    <span class="formula-label">ผลบวก n พจน์</span>
+                                    <span class="formula-val">Sₙ = a₁(1 − rⁿ) / (1 − r)</span>
+                                </div>
+                                <div class="learn-example">
+                                    <strong>ตัวอย่าง:</strong> 2, 6, 18, 54, ... → a₁ = 2, r = 3
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: ABOUT US -->
+                <div id="tab-about" class="tab-panel">
+                    <div class="about-area">
+                        <div class="create-icon-wrap">
+                            <div class="create-icon">👥</div>
+                        </div>
+                        <h2 class="section-heading">คณะผู้จัดทำ</h2>
+                        <p class="section-sub">รายชื่อทีมงานผู้พัฒนา Math Quiz Challenge</p>
+
+                        <div class="glass-card about-card">
+                            <div class="team-list">
+                                <div class="team-item">
+                                    <div class="team-rank">⭐</div>
+                                    <div class="team-info">
+                                        <p class="team-name">นายจาตุรงค์ กิจโชคประเสริฐ</p>
+                                        <p class="team-role">ผู้จัดทำหลัก (Creator)</p>
+                                    </div>
+                                </div>
+                                <div class="team-item">
+                                    <div class="team-rank">👤</div>
+                                    <div class="team-info">
+                                        <p class="team-name">นายกรมิษฐ์ อินดา</p>
+                                        <p class="team-role">สมาชิกทีม</p>
+                                    </div>
+                                </div>
+                                <div class="team-item">
+                                    <div class="team-rank">�</div>
+                                    <div class="team-info">
+                                        <p class="team-name">นายนพกิจ สุรินทร์ต๊ะ</p>
+                                        <p class="team-role">สมาชิกทีม</p>
+                                    </div>
+                                </div>
+                                <div class="team-item">
+                                    <div class="team-rank">👤</div>
+                                    <div class="team-info">
+                                        <p class="team-name">นายวุฒิภัทร จ่าหย่อง</p>
+                                        <p class="team-role">สมาชิกทีม</p>
+                                    </div>
+                                </div>
+                                <div class="team-item">
+                                    <div class="team-rank">👤</div>
+                                    <div class="team-info">
+                                        <p class="team-name">นายสุริยะทิตย์ สุริยะวงค์</p>
+                                        <p class="team-role">สมาชิกทีม</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End Tab Content Area -->
+        </section>
+
+        <!-- ==================== LOBBY SCREEN ==================== -->
+        <section id="screen-lobby" class="screen">
+            <div class="lobby-top">
+                <div class="glass-card pin-card">
+                    <span class="pin-label">Game PIN:</span>
+                    <h2 id="lobby-pin" class="pin-number">----</h2>
+
+                </div>
+                <div id="host-start-area" class="hidden">
+                    <button id="btn-start-game" class="btn btn-accent btn-lg pulse-anim">▶ START</button>
+                </div>
+            </div>
+            <div class="lobby-center">
+                <div class="waiting-badge">
+                    <span class="dot-loader"></span>
+                    <span>Waiting for players...</span>
+                </div>
+                <div class="player-count-badge">
+                    <span>👥</span>
+                    <span id="lobby-player-count">0</span>
+                    <span>Players</span>
+                </div>
+                <div id="lobby-players" class="players-flex"></div>
+            </div>
+        </section>
+
+        <!-- ==================== QUESTION SCREEN ==================== -->
+        <section id="screen-question" class="screen">
+            <div class="q-header">
+                <div class="timer-box">
+                    <svg class="timer-svg" viewBox="0 0 100 100">
+                        <circle class="timer-bg" cx="50" cy="50" r="45" />
+                        <circle id="timer-ring" class="timer-fg" cx="50" cy="50" r="45" />
+                    </svg>
+                    <span id="timer-text" class="timer-text">30</span>
+                </div>
+                <div class="q-text-area">
+                    <div class="q-progress" id="q-progress">ข้อ 1/10</div>
+                    <h2 id="q-text" class="q-text">Loading...</h2>
+                </div>
+                <div class="answers-counter">
+                    <span class="ac-label">Answers</span>
+                    <span id="ac-count" class="ac-num">0</span>
+                </div>
+            </div>
+            <div id="formula-bar" class="formula-bar glass-card">
+                <span class="formula-icon">📐</span>
+                <div>
+                    <p class="formula-title">สูตรที่เกี่ยวข้อง</p>
+                    <p id="formula-text" class="formula-content">aₙ = a₁ + (n-1)d</p>
+                </div>
+            </div>
+            <div id="options-grid" class="options-grid"></div>
+            <div class="q-footer">
+                <span>MATH CHALLENGE</span>
+                <span id="q-footer-pin">PIN: ----</span>
+            </div>
+        </section>
+
+        <!-- ==================== HOST WAITING (KAHOOT LAYOUT) ==================== -->
+        <section id="screen-host-wait" class="screen host-screen-fullpage">
+            <!-- Top Row: Timer | Question | Answers -->
+            <div class="host-top-row">
+                <div class="host-side-badge">
+                    <div class="timer-box timer-box-host">
+                        <svg class="timer-svg" viewBox="0 0 100 100">
+                            <circle class="timer-bg" cx="50" cy="50" r="45" />
+                            <circle id="host-timer-ring" class="timer-fg" cx="50" cy="50" r="45" />
+                        </svg>
+                        <span id="host-timer-text" class="timer-text">30</span>
+                    </div>
+                </div>
+
+                <div class="host-q-center">
+                    <div class="host-q-box glass-card">
+                        <div class="host-q-num" id="host-q-num">ข้อ 1/10</div>
+                        <h2 id="host-q-text" class="host-question">Loading...</h2>
+                    </div>
+                    <div id="host-formula-bar" class="formula-bar glass-card" style="margin-top:10px;">
+                        <span class="formula-icon">📐</span>
+                        <div>
+                            <p class="formula-title">สูตรที่เกี่ยวข้อง</p>
+                            <p id="host-formula-text" class="formula-content">aₙ = a₁ + (n-1)d</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="host-side-badge">
+                    <div class="host-answer-badge glass-card">
+                        <span class="stat-num" id="host-answers">0</span>
+                        <span class="stat-label">Answers</span>
+                    </div>
+                    <div class="host-answer-badge glass-card" style="margin-top:8px;">
+                        <span class="stat-num" id="host-total-players">0</span>
+                        <span class="stat-label">Players</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom: BIG answer buttons (2x2 grid like Kahoot) -->
+            <div class="host-options-grid" id="host-options-display"></div>
+        </section>
+
+        <!-- ==================== PLAYER RESULT ==================== -->
+        <section id="screen-result" class="screen">
+            <div id="result-box" class="result-box"></div>
+        </section>
+
+        <!-- ==================== LEADERBOARD ==================== -->
+        <section id="screen-leaderboard" class="screen">
+            <h2 class="section-title">🏆 Leaderboard</h2>
+            <div id="lb-list" class="lb-list"></div>
+            <div id="lb-host-controls" class="hidden">
+                <button id="btn-next-q" class="btn btn-accent btn-lg">NEXT ➜</button>
+            </div>
+        </section>
+
+        <!-- ==================== GAME OVER ==================== -->
+        <section id="screen-gameover" class="screen">
+            <div class="gameover-content">
+                <div class="confetti-area" id="confetti-area"></div>
+                <div class="trophy-anim">🏆</div>
+                <h1 class="gameover-title">GAME OVER</h1>
+                <div id="podium" class="podium"></div>
+                <button onclick="location.reload()" class="btn btn-accent btn-lg">🔄 Play Again</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
