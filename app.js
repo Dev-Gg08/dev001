@@ -286,24 +286,31 @@ function showPlayerQuestion(data) {
 // TIMER
 // ========================================================
 function startCountdown(textId, ringId) {
-    clearInterval(timerInterval);
-    timeLeft = 30;
+    if (timerInterval) clearInterval(timerInterval);
+
     const textEl = document.getElementById(textId);
     const ringEl = document.getElementById(ringId);
     const circumference = 2 * Math.PI * 45;
-    textEl.textContent = timeLeft;
-    ringEl.style.strokeDashoffset = '0';
 
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        textEl.textContent = Math.max(timeLeft, 0);
-        ringEl.style.strokeDashoffset = ((30 - timeLeft) / 30) * circumference;
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            if (role === 'host') goLeaderboard();
-            else if (!hasAnswered) showPlayerResult(false, 0);
-        }
-    }, 1000);
+    const updateTimer = () => {
+        db.ref('rooms/' + roomId + '/timerStart').once('value', snap => {
+            const timerStart = snap.val() || Date.now();
+            const elapsed = Math.floor((Date.now() - timerStart) / 1000);
+            timeLeft = Math.max(30 - elapsed, 0);
+
+            textEl.textContent = timeLeft;
+            ringEl.style.strokeDashoffset = ((30 - timeLeft) / 30) * circumference;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                if (role === 'host') goLeaderboard();
+                else if (!hasAnswered) showPlayerResult(false, 0);
+            }
+        });
+    };
+
+    updateTimer();
+    timerInterval = setInterval(updateTimer, 1000);
 }
 
 // ========================================================
@@ -323,9 +330,7 @@ async function submitAnswer(chosenIndex) {
     totalScore += points;
 
     await db.ref('rooms/' + roomId + '/players/' + playerId).update({ score: totalScore, answered: true });
-    const countRef = db.ref('rooms/' + roomId + '/answersCount');
-    const snap = await countRef.once('value');
-    await countRef.set((snap.val() || 0) + 1);
+    await db.ref('rooms/' + roomId + '/answersCount').transaction(current => (current || 0) + 1);
 
     setTimeout(() => showPlayerResult(correct, points), 300);
 }
@@ -399,6 +404,7 @@ function renderGameOver(players) {
 
     const medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
     order.forEach(p => {
+        if (!p.name) return; // Skip if no data
         const col = document.createElement('div');
         col.className = 'podium-col podium-' + p.rank;
         col.innerHTML = '<div class="podium-medal">' + medals[p.rank] + '</div><div class="podium-name">' + p.name + '</div><div class="podium-score">' + (p.score || 0).toLocaleString() + '</div>';
